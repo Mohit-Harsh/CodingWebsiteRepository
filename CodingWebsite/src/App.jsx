@@ -1,0 +1,56 @@
+import { useState, useEffect } from 'react';
+import React from 'react';
+import {Routes,Route, createBrowserRouter} from 'react-router-dom';
+import Home from './components/Home.jsx';
+import Profile from './components/Profile.jsx';
+import Practice from './components/Practice.jsx';
+import LoginPage from './LoginPage.jsx';
+import styles from './App.module.css';
+import Navbar from './components/navbar/Navbar.jsx';
+import ProblemPage from './components/problemlist/ProblemPage.jsx';
+
+function App() {
+
+  const [auth,setAuth] = useState(false);
+
+  if(auth)
+  {    
+    return(
+
+      <div className="container-fluid" style={{padding : 0, margin : 0, width : '100%', height: 'fit-content', overflow:'hidden'}}>
+            
+        <div className="row">
+
+          <div className="col-2" id={styles.col3}>
+
+            <Navbar></Navbar>
+
+          </div>
+
+          <div className="col-10" style={{height:'100vh',overflowY:'scroll',overflowX:'hidden'}}>
+            <Routes>
+              <Route path='/'>
+                <Route index={true} element={<Home/>}/>
+                <Route path='problem/:title' element={<ProblemPage></ProblemPage>}/>
+              </Route>
+              <Route path='profile' element={<Profile></Profile>} />
+              <Route path='practice' element={<Practice></Practice>}></Route>
+              <Route path='logout' element={<Home></Home>}/>
+              <Route path='delete' element={<Home></Home>}/>
+            </Routes>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  else{
+    
+    return(<LoginPage auth={auth} setAuth={setAuth}></LoginPage>);
+
+  }
+  
+}
+
+
+export default App;

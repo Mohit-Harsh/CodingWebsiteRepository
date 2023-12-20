@@ -1,0 +1,110 @@
+#recom
+{
+  padding-top: 2vw;
+  margin-left: 3vw;
+
+}
+
+#nav
+{
+  width: 100%;
+  padding: 2vw 2vw 1vw 0vw;
+  margin: 0;
+  height: fit-content;
+  background-color: transparent;
+}
+#div
+{
+  padding: 0vw 2vw 0vw 0vw;
+  margin: 0;
+  height: 2vw;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+#h3
+{
+  font-size: 1.3vw;
+  font-weight: 500;
+  color: rgba(27, 2, 103,0.75);
+}
+
+#h4
+{
+  font-size: 1vw;
+  font-weight: 500;
+  color: rgba(27, 2, 103,0.75);
+}
+
+#h5
+{
+    margin: 0.5vw 0vw;
+    font-size: 0.8vw;
+    font-weight: 500;
+    color: rgba(27, 2, 103,0.3);
+    width: fit-content ;
+    height: 2vw;
+}
+
+#h5active
+{
+  margin: 0.5vw 0vw;
+  font-size: 0.8vw;
+  font-weight: 500;
+  color: rgba(27, 2, 103,0.75);
+  width: fit-content ;
+  height: 2vw;
+  border-bottom: 4px solid rgba(27, 2, 103,0.65);
+}
+
+#h5:hover
+{
+  cursor: pointer;
+}
+
+#h5active:hover
+{
+  cursor: pointer;
+}
+
+#p
+{
+  font-size: 0.75vw;
+}
+
+#col2
+{
+  width: fit-content;
+  padding: 0;
+  padding-right: 2vw;
+  border-bottom: 1px solid rgba(27, 2, 103,0.1);
+  height: 2.5vw;
+}
+
+#col3
+{
+  background-color: white;
+  box-shadow: 0px 4px 8px 0px rgb(230, 230, 230);
+  height:  100vh;
+  position: sticky;
+  padding: 0;
+}
+
+#btn
+{
+  padding: 0.5vw;
+  background-color: rgb(255, 115, 0);
+  color: white;
+  border: transparent;
+  width: 100%;
+  border-radius: 0.5vw;
+  font-size: 0.8vw;
+
+}
+
+#col4
+{
+  width: fit-content;
+}

@@ -1,0 +1,12 @@
+#card
+{
+    height: 24.3vw; box-shadow: 0px 8px 12px 2px rgb(230, 230, 230); border: hidden; width: 20vw;
+}
+#header
+{
+    color: white; font-size: 1.3vw; background-image: linear-gradient(to right, rgba(27, 2, 103, 0.9) , rgb(57, 11, 99, 0.85));
+}
+#body
+{
+    padding: 1vw 1vw 1vw 1vw;
+}

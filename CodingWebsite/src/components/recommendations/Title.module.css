@@ -1,0 +1,46 @@
+#row
+{
+    padding: 1vw 0vw 0vw 1vw;
+    
+}
+
+#h5
+{
+    margin-bottom: 0.5vw;
+    font-size: 1.2vw;
+    font-weight: 500;
+    color: rgba(27, 2, 103, 0.75);
+}
+
+#p
+{
+    font-size: 0.8vw; color: dimgray;
+    
+}
+
+#a
+{
+    color: rgb(249,107,36); font-size: 0.8vw; font-weight: 600;
+}
+
+#col2
+{
+    display: flex;
+    align-items: center;
+    text-align: start;
+    justify-content: center;
+    padding-left: 1vw;
+}
+#seemore
+
+{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+#hr
+{
+    margin-left: 1vw;
+    margin-right: 1vw;
+}

@@ -1,0 +1,89 @@
+#recom
+{
+  padding-top: 2vw;
+
+}
+
+#h3
+{
+  font-size: 1.3vw;
+  font-weight: 500;
+  color: rgba(27, 2, 103,0.75);
+}
+
+#h4
+{
+  font-size: 1vw;
+  font-weight: 500;
+  color: rgba(27, 2, 103,0.75);
+}
+
+#h5
+{
+    margin: 0.5vw 0vw;
+    font-size: 0.8vw;
+    font-weight: 500;
+    color: rgba(27, 2, 103,0.3);
+    width: fit-content ;
+    height: 2vw;
+}
+
+#h5active
+{
+  margin: 0.5vw 0vw;
+  font-size: 0.8vw;
+  font-weight: 500;
+  color: rgba(27, 2, 103,0.75);
+  width: fit-content ;
+  height: 2vw;
+  border-bottom: 4px solid rgba(27, 2, 103,0.65);
+}
+
+#h5:hover
+{
+  cursor: pointer;
+}
+
+#h5active:hover
+{
+  cursor: pointer;
+}
+
+#p
+{
+  font-size: 0.75vw;
+}
+
+#col2
+{
+  width: fit-content;
+  padding: 0;
+  padding-right: 2vw;
+  border-bottom: 1px solid rgba(27, 2, 103,0.1);
+  height: 2.5vw;
+}
+
+#col3
+{
+  padding-right: 0;
+  display: flex;
+  align-items: baseline;
+  padding-top: 0.3vw;
+}
+
+#btn
+{
+  padding: 0.5vw;
+  background-color: rgb(255, 115, 0);
+  color: white;
+  border: transparent;
+  width: 100%;
+  border-radius: 0.5vw;
+  font-size: 0.8vw;
+
+}
+
+#col4
+{
+  width: fit-content;
+}

@@ -1,0 +1,42 @@
+#card
+{
+    height: 20vw; border: hidden; box-shadow: 0px 8px 12px 2px rgb(230, 230, 230); padding-bottom: 1vw;
+}
+
+#profile
+{
+    height: auto; width: fit-content;border:hidden; border-radius: 10vw; padding: 0;margin-left: auto;margin-right: auto; overflow: hidden; margin-bottom: 1vw; margin-top: 1vw; box-shadow: 0px 2px 15px 0px rgb(170, 170, 170);
+}
+
+#img
+{
+    position: relative; top: 1vw; height: 8vw;
+}
+
+#col
+{
+    padding: 2px 2px 2px 2px;
+}
+
+#chart
+{
+    height: 20vw; background-color: transparent; border: hidden; padding: 0vw 2vw 0vw 2vw;  border-radius: 8px;
+}
+
+#row
+{
+    height: 20vw;
+    padding: 0;
+}
+
+#h5
+{
+    font-size: 1.2vw;
+    font-weight: 500;
+    color: rgba(27, 2, 103);
+}
+
+#p
+{
+    font-size: 0.7vw;
+}
