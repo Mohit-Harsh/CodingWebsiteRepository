@@ -34,7 +34,7 @@ class SolvedProblems(models.Model):
     userid = models.ForeignKey(User, on_delete=models.CASCADE)
     problemid = models.ForeignKey(ApiProblems, on_delete=models.CASCADE)
     date = models.DateField()
-    time = models.DurationField()
+    time = models.IntegerField()
     accuracy = models.DecimalField(max_digits=5,decimal_places=2, validators=[MaxValueValidator(100.00)])
 
 

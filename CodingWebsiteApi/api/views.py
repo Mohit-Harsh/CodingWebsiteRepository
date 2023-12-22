@@ -14,6 +14,7 @@ from rest_framework.exceptions import AuthenticationFailed, NotFound
 from rest_framework.response import Response
 from .recommendations import recommend_by_topic
 from rest_framework import status
+from collections import defaultdict
 
 class TopicChart(APIView):
 
@@ -26,16 +27,39 @@ class TopicChart(APIView):
 
         else:
 
-            user_id = jwt.decode(token,'secret',algorithms="HS256")['id']
+            payload = jwt.decode(token,'secret',algorithms="HS256")
+            user_id = payload['id']
             user_problems_objects = SolvedProblems.objects.filter(userid=user_id)
-            user_problems_ids = [x['problemid'] for x in SolvedProblemSerializer(user_problems_objects, many=True).data]
+            user_problems_data = SolvedProblemSerializer(user_problems_objects, many=True).data
+            user_problems_ids = [x['problemid'] for x in user_problems_data]
 
             problem_objects = ApiProblems.objects.filter(id__in=user_problems_ids)
-            problem_list = ProblemSerializer(problem_objects, many=True)
+            problem_list = ProblemSerializer(problem_objects, many=True).data
 
-            print(problem_list.data)
+            solved = defaultdict(int)
+            time = defaultdict(int)
+            accuracy = defaultdict(float)
 
-            return Response()
+            for i in range(len(user_problems_data)):
+
+                p = [x.strip() for x in problem_list[i]['related_topics'].split(",")]
+
+                for topic in p:
+
+                    solved[topic] += 1
+                    accuracy[topic] += float(user_problems_data[i]['accuracy'])
+                    time[topic] += int(user_problems_data[i]['time'])
+
+            for topic in accuracy.keys():
+
+                accuracy[topic] /= solved[topic]
+                time[topic] //= solved[topic]
+
+            response = Response()
+
+            response.data = {"Solved": solved, "Time": time, "Accuracy": accuracy}
+
+            return response
 
 class ProblemByIdList(APIView):
 
@@ -128,7 +152,6 @@ class SolvedProblemsView(APIView):
             data = request.data
             payload = jwt.decode(token, 'secret', algorithms='HS256')
             data["userid"] = payload['id']
-            print(data)
             serializer = SolvedProblemSerializer(data=data)
             if serializer.is_valid():
 
