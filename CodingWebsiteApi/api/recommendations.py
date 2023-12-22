@@ -34,8 +34,6 @@ def recommend_by_topic(topics):
 
     recommendations = ApiProblems.objects.filter(id__in=index)
 
-    print(recommendations)
-
     return recommendations
 
 
