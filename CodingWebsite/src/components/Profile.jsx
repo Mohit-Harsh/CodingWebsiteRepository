@@ -1,15 +1,9 @@
-import styles from "./Profile.module.css";
-import Title from "./recommendations/Title.jsx";
-import Recomprob from "./recommendations/Recomprob.jsx";
-import New from './recommendations/New.jsx';
 import React, { useEffect, useState } from 'react';
-import Problemlist from './problemlist/Problemlist.jsx'
-import Topicfilter from './topicfilter/Topicfilter.jsx';
 import axios from "axios";
+import Chart from 'chart.js/auto'
 
-export default function Home({recom,allprob,setPageNumber,changeData,sortByAccuracy,sortByFrequency,sortByDifficulty,newprob,setTopicFilter})
+export default function Profile({})
 { 
-    const [solved, setSolved] = useState([]);
     const config = {
       headers: {
         "Content-Type": "application/json"
@@ -20,8 +14,29 @@ export default function Home({recom,allprob,setPageNumber,changeData,sortByAccur
     useEffect(() =>{
       async function fetchdata()
       {
-        const response = await axios.get('http://127.0.0.1:8000/api/solved',config);
-        console.log(response);
+        const response = await axios.get('http://127.0.0.1:8000/api/topicchart/',config);
+        const solved_keys = Object.keys(response.data['Solved']);
+        const solved_values = Object.values(response.data['Solved']);
+        new Chart(
+          document.getElementById('topicsolved'),
+          {
+            type: 'bar',
+            data: {
+              labels: solved_keys,
+              datasets: [
+                {
+                  label: 'Problems Solved Per Topic',
+                  data: solved_values
+                }
+              ]
+            },
+            options:{
+              scales:{
+                y:{max:5, tick:1}
+              }
+            }
+          }
+        );
       }
       fetchdata();
     },[])
@@ -30,6 +45,16 @@ export default function Home({recom,allprob,setPageNumber,changeData,sortByAccur
         <>
 
             <h5>Profile</h5>
+            <div className="row">
+              <div className="col-8">
+                  <div className="row">
+                    <div style={{width: "100%",height:"15vw"}}><canvas id="topicsolved"></canvas></div>
+                  </div>
+              </div>
+              <div className="col-4">
+                
+              </div>
+            </div>
 
         </>
     )
