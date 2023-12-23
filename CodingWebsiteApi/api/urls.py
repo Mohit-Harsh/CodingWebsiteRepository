@@ -11,4 +11,5 @@ urlpatterns = [
     path('similar/', SimilarProblems.as_view()),
     path('problembyidlist/', ProblemByIdList.as_view()),
     path('topicchart/', TopicChart.as_view()),
+    path('companychart/', CompanyChart.as_view()),
 ]

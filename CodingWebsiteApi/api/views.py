@@ -40,20 +40,87 @@ class TopicChart(APIView):
             time = defaultdict(int)
             accuracy = defaultdict(float)
 
+            easy = {"Solved": solved, "Time": time, "Accuracy": accuracy}
+            medium = {"Solved": solved, "Time": time, "Accuracy": accuracy}
+            hard = {"Solved": solved, "Time": time, "Accuracy": accuracy}
+
             for i in range(len(user_problems_data)):
 
                 p = [x.strip() for x in problem_list[i]['related_topics'].split(",")]
 
                 for topic in p:
+                    if problem_list[i]['difficulty'] == 'Easy':
+                        easy["Solved"][topic] += 1
+                        easy["Accuracy"][topic] += float(user_problems_data[i]['accuracy'])
+                        easy["Time"][topic] += int(user_problems_data[i]['time'])
+                    elif problem_list[i]['difficulty'] == 'Medium':
+                        medium["Solved"][topic] += 1
+                        medium["Accuracy"][topic] += float(user_problems_data[i]['accuracy'])
+                        medium["Time"][topic] += int(user_problems_data[i]['time'])
+                    elif problem_list[i]['difficulty'] == 'Hard':
+                        hard["Solved"][topic] += 1
+                        hard["Accuracy"][topic] += float(user_problems_data[i]['accuracy'])
+                        hard["Time"][topic] += int(user_problems_data[i]['time'])
 
-                    solved[topic] += 1
-                    accuracy[topic] += float(user_problems_data[i]['accuracy'])
-                    time[topic] += int(user_problems_data[i]['time'])
+            for topic in easy["Accuracy"].keys():
 
-            for topic in accuracy.keys():
+                easy["Accuracy"][topic] /= easy['Solved'][topic]
+                easy['Time'][topic] //= easy['Solved'][topic]
 
-                accuracy[topic] /= solved[topic]
-                time[topic] //= solved[topic]
+            for topic in medium["Accuracy"].keys():
+
+                medium["Accuracy"][topic] /= medium['Solved'][topic]
+                medium['Time'][topic] //= medium['Solved'][topic]
+
+            for topic in hard["Accuracy"].keys():
+
+                hard["Accuracy"][topic] /= hard['Solved'][topic]
+                hard['Time'][topic] //= hard['Solved'][topic]
+
+            response = Response()
+
+            response.data = {"Easy": easy, "Medium": medium, "Hard": hard}
+
+            return response
+
+class CompanyChart(APIView):
+
+    def get(self, request):
+
+        token = request.COOKIES['jwt']
+
+        if not token:
+            raise AuthenticationFailed('Unauthorized')
+
+        else:
+
+            payload = jwt.decode(token,'secret',algorithms="HS256")
+            user_id = payload['id']
+            user_problems_objects = SolvedProblems.objects.filter(userid=user_id)
+            user_problems_data = SolvedProblemSerializer(user_problems_objects, many=True).data
+            user_problems_ids = [x['problemid'] for x in user_problems_data]
+
+            problem_objects = ApiProblems.objects.filter(id__in=user_problems_ids)
+            problem_list = ProblemSerializer(problem_objects, many=True).data
+
+            solved = defaultdict(int)
+            time = defaultdict(int)
+            accuracy = defaultdict(float)
+
+            for i in range(len(user_problems_data)):
+
+                p = [x.strip() for x in problem_list[i]['companies'].split(",")]
+
+                for company in p:
+
+                    solved[company] += 1
+                    accuracy[company] += float(user_problems_data[i]['accuracy'])
+                    time[company] += int(user_problems_data[i]['time'])
+
+            for company in accuracy.keys():
+
+                accuracy[company] /= solved[company]
+                time[company] //= solved[company]
 
             response = Response()
 
