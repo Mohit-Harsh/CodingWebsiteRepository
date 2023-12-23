@@ -36,46 +36,70 @@ class TopicChart(APIView):
             problem_objects = ApiProblems.objects.filter(id__in=user_problems_ids)
             problem_list = ProblemSerializer(problem_objects, many=True).data
 
-            solved = defaultdict(int)
-            time = defaultdict(int)
-            accuracy = defaultdict(float)
-
-            easy = {"Solved": solved, "Time": time, "Accuracy": accuracy}
-            medium = {"Solved": solved, "Time": time, "Accuracy": accuracy}
-            hard = {"Solved": solved, "Time": time, "Accuracy": accuracy}
+            easy = {"Solved": defaultdict(int), "Time": defaultdict(int), "Accuracy": defaultdict(int)}
+            medium = {"Solved": defaultdict(int), "Time": defaultdict(int), "Accuracy": defaultdict(int)}
+            hard = {"Solved": defaultdict(int), "Time": defaultdict(int), "Accuracy": defaultdict(int)}
 
             for i in range(len(user_problems_data)):
 
                 p = [x.strip() for x in problem_list[i]['related_topics'].split(",")]
 
                 for topic in p:
+
+                    easy["Solved"][topic] = 0
+                    easy["Accuracy"][topic] = 0
+                    easy["Time"][topic] = 0
+
+                    medium["Solved"][topic] = 0
+                    medium["Accuracy"][topic] = 0
+                    medium["Time"][topic] = 0
+
+                    hard["Solved"][topic] = 0
+                    hard["Accuracy"][topic] = 0
+                    hard["Time"][topic] = 0
+
+
+            for i in range(len(user_problems_data)):
+
+                p = [x.strip() for x in problem_list[i]['related_topics'].split(",")]
+
+                for topic in p:
+
                     if problem_list[i]['difficulty'] == 'Easy':
                         easy["Solved"][topic] += 1
                         easy["Accuracy"][topic] += float(user_problems_data[i]['accuracy'])
                         easy["Time"][topic] += int(user_problems_data[i]['time'])
+
                     elif problem_list[i]['difficulty'] == 'Medium':
                         medium["Solved"][topic] += 1
                         medium["Accuracy"][topic] += float(user_problems_data[i]['accuracy'])
                         medium["Time"][topic] += int(user_problems_data[i]['time'])
+
                     elif problem_list[i]['difficulty'] == 'Hard':
                         hard["Solved"][topic] += 1
                         hard["Accuracy"][topic] += float(user_problems_data[i]['accuracy'])
                         hard["Time"][topic] += int(user_problems_data[i]['time'])
 
             for topic in easy["Accuracy"].keys():
-
-                easy["Accuracy"][topic] /= easy['Solved'][topic]
-                easy['Time'][topic] //= easy['Solved'][topic]
+                try:
+                    easy["Accuracy"][topic] /= easy['Solved'][topic]
+                    easy['Time'][topic] //= easy['Solved'][topic]
+                except:
+                    pass
 
             for topic in medium["Accuracy"].keys():
-
-                medium["Accuracy"][topic] /= medium['Solved'][topic]
-                medium['Time'][topic] //= medium['Solved'][topic]
+                try:
+                    medium["Accuracy"][topic] /= medium['Solved'][topic]
+                    medium['Time'][topic] //= medium['Solved'][topic]
+                except:
+                    pass
 
             for topic in hard["Accuracy"].keys():
-
-                hard["Accuracy"][topic] /= hard['Solved'][topic]
-                hard['Time'][topic] //= hard['Solved'][topic]
+                try:
+                    hard["Accuracy"][topic] /= hard['Solved'][topic]
+                    hard['Time'][topic] //= hard['Solved'][topic]
+                except:
+                    pass
 
             response = Response()
 
