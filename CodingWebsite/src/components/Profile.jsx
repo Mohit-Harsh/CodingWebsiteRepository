@@ -15,18 +15,31 @@ export default function Profile({})
       async function fetchdata()
       {
         const response = await axios.get('http://127.0.0.1:8000/api/topicchart/',config);
-        const solved_keys = Object.keys(response.data['Solved']);
-        const solved_values = Object.values(response.data['Solved']);
+        const easy_solved_values = Object.values(response.data['Easy']['Solved']);
+        const medium_solved_values = Object.values(response.data['Medium']['Solved']);
+        const hard_solved_values = Object.values(response.data['Hard']['Solved']);
+        const labels = Object.keys(response.data['Easy']['Solved']);
         new Chart(
           document.getElementById('topicsolved'),
           {
             type: 'bar',
             data: {
-              labels: solved_keys,
+              labels: labels,
               datasets: [
                 {
-                  label: 'Problems Solved Per Topic',
-                  data: solved_values
+                  label: 'Easy',
+                  data: easy_solved_values,
+                  backgroundColor: "#ea5545",
+                },
+                {
+                  label: 'Medium',
+                  data: medium_solved_values,
+                  backgroundColor: "#27aeef",
+                },
+                {
+                  label: 'Hard',
+                  data: hard_solved_values,
+                  backgroundColor: "#edbf33",
                 }
               ]
             },
