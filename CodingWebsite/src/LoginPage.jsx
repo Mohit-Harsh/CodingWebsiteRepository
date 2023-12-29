@@ -61,6 +61,7 @@ export default function LoginPage({auth,setAuth})
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                defaultValue="test2@gmail.com"
                 autoFocus
                 onChange={(e) => {setEmail(e.target.value)}}
               />
@@ -73,6 +74,7 @@ export default function LoginPage({auth,setAuth})
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                defaultValue="test2@123"
                 onChange={(e) => {setPassword(e.target.value)}}
               />
               <Button style={{fontSize:'1.2vw'}}
