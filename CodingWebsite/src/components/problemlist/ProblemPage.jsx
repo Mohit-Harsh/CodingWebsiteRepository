@@ -3,9 +3,12 @@ import { useLocation } from "react-router-dom";
 import {useState, useEffect} from 'react';
 import styles from './ProblemPage.module.css';
 import SimilarProblems from "./SimilarProblems";
+import SimilarDescProblems from './SimilarDescProblems.jsx';
 
 export default function ProblemPage()
 {
+    
+
     const config = {
         headers: {
           "Content-Type": "application/json"
@@ -14,6 +17,10 @@ export default function ProblemPage()
         }
     let {state} = useLocation();
     const [similar, setSimilar] = useState([]);
+    const [desc,setDesc] = useState([]);
+    const description = state['description'].split(',')[0];
+
+    console.log(description);
 
     useEffect(() => {async function fetchdata(){
         const response = await axios.post('http://127.0.0.1:8000/api/similar/',{"topics":state['related_topics']},config);
@@ -21,6 +28,13 @@ export default function ProblemPage()
         }
         fetchdata();
     },[])
+    useEffect(() => {async function fetchdata(){
+        const response = await axios.post('http://127.0.0.1:8000/api/problembydescription/',{"des":description},config);
+        setDesc(response);
+        }
+        fetchdata();
+    },[])
+
     const topics = state['description'].split("\n\n");
     const tags = state['related_topics'].split(',')
     const companies = state['companies'].split(',')
@@ -50,6 +64,10 @@ export default function ProblemPage()
                 <div className="row" id={styles.drow}>
                     <SimilarProblems problems = {similar.data}></SimilarProblems>
                 </div>
+                <div className="row" id={styles.drow}>
+                    <SimilarDescProblems problems = {desc.data}></SimilarDescProblems>
+                </div>
+                
             </div>
         </>
     )

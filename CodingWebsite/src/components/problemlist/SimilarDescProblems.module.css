@@ -1,0 +1,33 @@
+#p
+{
+    font-size: 0.8vw;
+    color: rgba(0, 0, 0, 0.75);
+}
+
+#ul
+{
+    color: rgba(0, 0, 0, 0.75);
+    margin: 1vw 2vw;
+    text-decoration: none;
+    font-size: 0.8vw;
+}
+
+#link
+{
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.75);
+    width: fit-content;
+    display: block;
+}
+
+#li
+{
+    margin: -1vw;
+    text-decoration: none;
+    width: fit-content;
+}
+#li:hover
+{
+    cursor: pointer;
+    text-decoration: underline;
+}
