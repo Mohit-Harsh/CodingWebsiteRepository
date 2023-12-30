@@ -9,7 +9,7 @@ const Recomprob = ({obj,title,difficulty,accuracy,submissions}) =>
     {
         return(
             <>
-                <Link to={`problem/${title}`} state={obj} style={{textDecoration:'none'}}>
+                <Link to={`/problem/${title}`} state={obj} style={{textDecoration:'none'}}>
                     <div className="card" id={styles.btn}>
                         <div className="card-body" style={{padding:0, height: '100%'}}>
                             <div className="row" style={{padding:0, height: '100%'}}>
@@ -36,7 +36,7 @@ const Recomprob = ({obj,title,difficulty,accuracy,submissions}) =>
     {
         return(
             <>
-                <Link to={`problem/${title}`} state={obj} style={{textDecoration:'none'}}>
+                <Link to={`/problem/${title}`} state={obj} style={{textDecoration:'none'}}>
                     <div className="card" id={styles.btn}>
                         <div className="card-body" style={{padding:0, height: '100%'}}>
                             <div className="row" style={{padding:0, height: '100%'}}>
@@ -63,7 +63,7 @@ const Recomprob = ({obj,title,difficulty,accuracy,submissions}) =>
     {
         return(
             <>
-                <Link to={`problem/${title}`} state={obj} style={{textDecoration:'none'}}>
+                <Link to={`/problem/${title}`} state={obj} style={{textDecoration:'none'}}>
                     <div className="card" id={styles.btn} onClick={() => <Navigate to={`problem/:${title}`} state={obj}/>}>
                         <div className="card-body" style={{padding:0, height: '100%'}}>
                             <div className="row" style={{padding:0, height: '100%'}}>

@@ -60,11 +60,14 @@ export default function ProblemPage()
                     {tags.map((tag) => <span key={tag} id={styles.span}>{tag}</span>)}
                     
                 </div>
-                <h5 id={styles.title}>Similar Problems</h5>
-                <div className="row" id={styles.drow}>
+                <h5 id={styles.title} style={{marginBottom:'0.5vw'}}>TOPIC BASED RECOMMENDATIONS</h5>
+                <p id={styles.p} style={{marginBottom:'1vw'}}>List of problems based on same or similar topics</p>
+                <div className="row" style={{margin:"2vw -1vw", width:'100%', height:'fit-content'}}>
                     <SimilarProblems problems = {similar.data}></SimilarProblems>
                 </div>
-                <div className="row" id={styles.drow}>
+                <h5 id={styles.title} style={{marginBottom:'0.5vw', marginTop:'2vw'}}>PROBLEM BASED RECOMMENDATIONS</h5>
+                <p id={styles.p} style={{marginBottom:'1vw'}}>List of problms based on similar problem statement</p>
+                <div className="row" style={{margin:"2vw -1vw", width:'100%', height:'fit-content'}}>
                     <SimilarDescProblems problems = {desc.data}></SimilarDescProblems>
                 </div>
                 

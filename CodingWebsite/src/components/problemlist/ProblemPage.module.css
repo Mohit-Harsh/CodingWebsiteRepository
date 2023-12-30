@@ -1,7 +1,7 @@
 #title
 {
-    margin-bottom: 2vw;
-    font-size: 1.5vw;
+    margin-bottom: 0.5vw;
+    font-size: 1.2vw;
     font-weight: 500;
     color: rgba(27, 2, 103, 0.75);
 }
@@ -13,12 +13,12 @@
 
 #drow
 {
-    width: 100%;
-    background-color: white;
-    border: none;
-    border-radius: 0.5vw;
-    box-shadow: 0px 4px 8px 0px rgb(230,230,230);
     padding: 1vw;
+    background-color: white;
+    box-shadow: 0px 4px 8px 4px rgb(230,230,230);
+    border: transparent;
+    border-radius: 0.5vw;
+    width: 100%;
     margin: auto;
     height: fit-content;
 }
@@ -32,4 +32,9 @@
 hr
 {
     margin: 1vw 0;
+}
+
+#p
+{
+  font-size: 0.8vw; color: dimgray;
 }
