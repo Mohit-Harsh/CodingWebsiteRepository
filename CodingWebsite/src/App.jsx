@@ -12,6 +12,8 @@ import ProblemPage from './components/problemlist/ProblemPage.jsx';
 function App() {
 
   const [auth,setAuth] = useState(false);
+  const [email, setEmail] = useState("test2@gmail.com")
+  const [password, setPassword] = useState("test2@123")
 
   if(auth)
   {    
@@ -30,13 +32,13 @@ function App() {
           <div className="col-10" style={{height:'100vh',overflowY:'scroll',overflowX:'hidden'}}>
             <Routes>
               <Route path='/'>
-                <Route index={true} element={<Home/>}/>
+                <Route index={true} element={<Home email={email}/>}/>
                 <Route path='problem/:title' element={<ProblemPage></ProblemPage>}/>
               </Route>
               <Route path='profile' element={<Profile></Profile>} />
               <Route path='practice' element={<Practice></Practice>}></Route>
-              <Route path='logout' element={<Home></Home>}/>
-              <Route path='delete' element={<Home></Home>}/>
+              <Route path='logout' element={<Home email={email}></Home>}/>
+              <Route path='delete' element={<Home email={email}></Home>}/>
             </Routes>
           </div>
         </div>
@@ -46,7 +48,7 @@ function App() {
 
   else{
     
-    return(<LoginPage auth={auth} setAuth={setAuth}></LoginPage>);
+    return(<LoginPage auth={auth} email={email} password={password} setAuth={setAuth} setEmail={setEmail} setPassword={setPassword}></LoginPage>);
 
   }
   

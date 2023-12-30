@@ -20,7 +20,7 @@ import Navbar from './navbar/Navbar';
 import { useEffect, useState } from "react";
 import axios from 'axios';
 
-export default function Home()
+export default function Home({email})
 {
   const config = {
     headers: {
@@ -108,7 +108,7 @@ export default function Home()
                       <div className="col-4" style={{display:'flex',textAlign:'center',alignItems:'center'}}>
 
                           <Avatar alt="Remy Sharp" src={pic} style={{alignSelf:'start', marginLeft:'2.5vw', width:'2vw', height:'2vw'}}/>
-                          <h5 style={{fontSize:'1vw',fontWeight:'500',marginLeft:'1vw',marginBottom:0}}>Sandeep Reddy Vanga</h5>
+                          <h5 style={{fontSize:'1vw',fontWeight:'500',marginLeft:'1vw',marginBottom:0}}>{email}</h5>
 
                       </div>
 
@@ -189,7 +189,7 @@ export default function Home()
                     <div className="col-8">
                       <div className="row">
                         <Title></Title>
-                        {recom.slice(0,5).map((obj)=><Recomprob key={obj['id']} title={obj['title']} difficulty={obj['difficulty']} accuracy={obj['acceptance_rate']} submissions={obj['submissions']}></Recomprob>)}
+                        {recom.slice(0,5).map((obj)=><Recomprob key={obj['id']} obj={obj} title={obj['title']} difficulty={obj['difficulty']} accuracy={obj['acceptance_rate']} submissions={obj['submissions']}></Recomprob>)}
                       </div>
                       <div className="row" id={styles.row2}>
                         <Problemlist data={allprob}  setPageNumber={setPageNumber} changeData={changeData} sortByAccuracy={sortByAccuracy} sortByFrequency={sortByFrequency} sortByDifficulty={sortByDifficulty}></Problemlist>

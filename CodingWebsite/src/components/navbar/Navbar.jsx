@@ -19,7 +19,7 @@ const Navbar = ({clickbrand}) =>
         
         <div className="container-fluid" id={styles.con1}>
             <img src={hnslogo} alt="" className={styles.img}/>
-            <span id={styles.brand} onClick={clickbrand}>Hack&Stack</span>
+            <span id={styles.brand} onClick={clickbrand}>Hack/Stack</span>
         </div>
 
         <nav id={styles.con2}>

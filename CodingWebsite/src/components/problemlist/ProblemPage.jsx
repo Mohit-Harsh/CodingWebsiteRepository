@@ -23,11 +23,19 @@ export default function ProblemPage()
     },[])
     const topics = state['description'].split("\n\n");
     const tags = state['related_topics'].split(',')
+    const companies = state['companies'].split(',')
 
     return(
         <>
-            <div className="container-fluid" style={{paddingTop:'2vw', paddingLeft:'3vw', paddingRight:'3vw'}}>
+            <div className="container-fluid" style={{paddingTop:'2vw', paddingLeft:'3vw', paddingRight:'3vw', paddingBottom:'2vw'}}>
                 <h5 id={styles.title}>{state['title']}</h5>
+                
+                <div className="row" style={{display:'flex', margin:'2vw auto'}}>
+                    
+                    {companies.map((company) => <span key={company} id={styles.span} style={{marginBottom:'0.5vw'}}>{company}</span>)}
+                    
+                </div>
+
                 <div className="row" id={styles.drow}>
                     {topics.map((item,i) =>
                         <p key={i} id={styles.description}>{item}</p>

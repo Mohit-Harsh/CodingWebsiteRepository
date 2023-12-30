@@ -17,6 +17,7 @@ const Topicfilter = ({setTopicFilter}) =>
         if(topicmap[event.target.innerText] === 0)
         {
             const topics = [...val,[event.target.innerText]];
+            topics.sort()
             setVal(topics);
             let newmap = topicmap;
             newmap[event.target.innerText] = 1;
@@ -46,7 +47,7 @@ const Topicfilter = ({setTopicFilter}) =>
     'Geometry', 'Sort', 'Dequeue',  'Stack', 'Suffix Array', 'Math', 'Line Sweep', 'Bit Manipulation', 'String', 'Minimax', 'Hash Table', 'Topological Sort', 'OOP','Breadth-first Search',
     'Trie', 'Segment Tree','Binary Search','Brainteaser','Rejection Sampling','Recursion', 'Tree', 'Ordered Map', 'Two Pointers', 'Divide and Conquer', 'Dynamic Programming',
     'Union Find','Binary Search Tree','Heap','Queue','Rolling Hash','Depth-first Search','Binary Indexed Tree'];
-
+    
 
     return(
         

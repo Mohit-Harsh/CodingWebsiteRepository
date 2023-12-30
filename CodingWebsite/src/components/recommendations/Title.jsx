@@ -7,8 +7,8 @@ const Title = () =>
         <>
             <div className="row">
                 
-                <h5 id={styles.h5}>RECOMMENDED PROBLEMS</h5>
-                <p id={styles.p}>List of problems recommended for the improvement for your performance</p>
+                <h5 id={styles.h5}>TRENDING PROBLEMS</h5>
+                <p id={styles.p}>List of problems that are currently being asked in most of the coding interviews.</p>
                 
             </div>
             

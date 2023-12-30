@@ -14,11 +14,8 @@ import axios from 'axios';
 import {Navigate} from 'react-router-dom';
 
 
-export default function LoginPage({auth,setAuth}) 
+export default function LoginPage({auth,email,password,setAuth,setEmail,setPassword}) 
 {
-
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
 
   const config = {
     headers: {
