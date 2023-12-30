@@ -16,6 +16,22 @@ from .recommendations import recommend_by_topic
 from rest_framework import status
 from collections import defaultdict
 
+class ProblemByCompany(ListAPIView):
+
+    serializer_class = ProblemSerializer
+    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    ordering_fields = ['id', 'rating', 'frequency', 'accepted', 'likes']
+    pagination_class = PageNumberPagination
+    def get_queryset(self):
+
+        token = self.request.COOKIES['jwt']
+        if not token:
+            raise AuthenticationFailed('Unauthorized')
+        else:
+            print(self.request.data)
+            data = ApiProblems.objects.filter(companies__icontains = self.request.data['company'])
+            return data
+
 class TopicChart(APIView):
 
     def get(self, request):

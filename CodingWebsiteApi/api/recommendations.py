@@ -30,9 +30,11 @@ def recommend_by_topic(topics):
 
     result = nn.kneighbors(X)
 
-    index = [x+1 for x in result[1][0]]
+    index = [x+2 for x in result[1][0]]
 
     recommendations = ApiProblems.objects.filter(id__in=index)
+
+    print(recommendations)
 
     return recommendations
 
