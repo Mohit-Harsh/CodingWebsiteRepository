@@ -5,7 +5,9 @@ from sklearn.neighbors import NearestNeighbors
 import joblib
 import numpy as np
 from psycopg2.extensions import register_adapter, AsIs
+from langchain.vectorstores import SKLearnVectorStore
 from rest_framework.response import Response
+from .apps import embeddings
 register_adapter(np.int64, AsIs)
 
 def recommend_by_topic(topics):
@@ -30,12 +32,21 @@ def recommend_by_topic(topics):
 
     result = nn.kneighbors(X)
 
-    index = [x+2 for x in result[1][0]]
+    index = [x+1 for x in result[1][0]]
 
-    recommendations = ApiProblems.objects.filter(id__in=index)
+    recommendations = ApiProblems.objects.filter(id__in=index[1:])
 
-    print(recommendations)
 
     return recommendations
+
+def recommned_by_description(description):
+
+    docstore = SKLearnVectorStore(embedding=embeddings, persist_path='skvectorstore')
+
+    doc_list = docstore.similarity_search(description, k=6)
+
+    titles = [x.metadata['title'] for x in doc_list[1:]]
+
+    return titles
 
 

@@ -12,9 +12,31 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import DjangoModelPermissions, IsAdminUser
 from rest_framework.exceptions import AuthenticationFailed, NotFound
 from rest_framework.response import Response
-from .recommendations import recommend_by_topic
+from .recommendations import recommend_by_topic, recommned_by_description
 from rest_framework import status
 from collections import defaultdict
+
+class SimilarDescription(APIView):
+    def post(self,request):
+
+        token = request.COOKIES['jwt']
+
+        if not token:
+
+            raise AuthenticationFailed('Unauthorized')
+
+        else:
+
+            titles = recommned_by_description(description=request.data['des'])
+
+            data = ApiProblems.objects.filter(title__in=titles)
+
+            serialized_data = ProblemSerializer(data,many=True)
+
+            response = Response()
+            response.data = serialized_data.data
+
+            return response
 
 class ProblemByCompany(ListAPIView):
 
