@@ -16,6 +16,39 @@ from .recommendations import recommend_by_topic, recommned_by_description
 from rest_framework import status
 from collections import defaultdict
 
+class CompanyChart(APIView):
+    def get(self, request):
+
+        token = request.COOKIES['jwt']
+        if not token:
+
+            raise AuthenticationFailed('Unauthorized')
+
+        else:
+
+            payload = jwt.decode(token,'secret',algorithms='HS256')
+            userid = payload['id']
+            userdata = SolvedProblems.objects.filter(userid=userid)
+            userdata = SolvedProblemSerializer(userdata, many=True).data
+            problemids = [x['problemid'] for x in userdata]
+            problemslist = ApiProblems.objects.filter(id__in=problemids)
+            problemslist = ProblemSerializer(problemslist, many=True).data
+
+            solved = defaultdict(int)
+
+            for problem in problemslist:
+
+                for company in problem['companies'].split(','):
+
+                    solved[company.strip()] += 1
+
+            print(solved)
+
+            response = Response()
+            response.data = solved
+
+            return response
+
 class SimilarDescription(APIView):
     def post(self,request):
 
