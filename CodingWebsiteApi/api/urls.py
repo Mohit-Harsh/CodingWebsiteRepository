@@ -11,7 +11,7 @@ urlpatterns = [
     path('similar/', SimilarProblems.as_view()),
     path('problembyidlist/', ProblemByIdList.as_view()),
     path('topicchart/', TopicChart.as_view()),
-    path('companychart/', CompanyChart.as_view()),
+    path('overallchart/', OverallChart.as_view()),
     path('problembycompany/', ProblemByCompany.as_view()),
     path('problembydescription/', SimilarDescription.as_view())
 ]

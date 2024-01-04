@@ -145,7 +145,7 @@ class TopicChart(APIView):
 
             return response
 
-class CompanyChart(APIView):
+class OverallChart(APIView):
 
     def get(self, request):
 
@@ -160,33 +160,45 @@ class CompanyChart(APIView):
             user_id = payload['id']
             user_problems_objects = SolvedProblems.objects.filter(userid=user_id)
             user_problems_data = SolvedProblemSerializer(user_problems_objects, many=True).data
-            user_problems_ids = [x['problemid'] for x in user_problems_data]
 
-            problem_objects = ApiProblems.objects.filter(id__in=user_problems_ids)
-            problem_list = ProblemSerializer(problem_objects, many=True).data
+            easy = {"Solved": 0, "Time": 0, "Accuracy": 0}
+            medium = {"Solved": 0, "Time": 0, "Accuracy": 0}
+            hard = {"Solved": 0, "Time": 0, "Accuracy": 0}
 
-            solved = defaultdict(int)
-            time = defaultdict(int)
-            accuracy = defaultdict(float)
+            for problem in user_problems_data:
 
-            for i in range(len(user_problems_data)):
+                data = ApiProblems.objects.filter(id=problem['problemid']).first()
+                serialized_data = ProblemSerializer(data).data
 
-                p = [x.strip() for x in problem_list[i]['companies'].split(",")]
+                if serialized_data['difficulty'] == 'Easy':
 
-                for company in p:
+                    easy['Solved']+=1
+                    easy['Time'] += int(problem['time'])
+                    easy['Accuracy'] += float(problem['accuracy'])
 
-                    solved[company] += 1
-                    accuracy[company] += float(user_problems_data[i]['accuracy'])
-                    time[company] += int(user_problems_data[i]['time'])
+                elif serialized_data['difficulty'] == 'Medium':
 
-            for company in accuracy.keys():
+                    medium['Solved']+=1
+                    medium['Time'] += int(problem['time'])
+                    medium['Accuracy'] += float(problem['accuracy'])
 
-                accuracy[company] /= solved[company]
-                time[company] //= solved[company]
+                else:
+
+                    hard['Solved'] += 1
+                    hard['Time'] += int(problem['time'])
+                    hard['Accuracy'] += float(problem['accuracy'])
+
+            easy['Time'] = "{:.2f}".format(easy['Time'] / easy['Solved'])
+            medium['Time'] = "{:.2f}".format(medium['Time'] / medium['Solved'])
+            hard['Time'] = "{:.2f}".format(hard['Time'] / hard['Solved'])
+
+            easy['Accuracy'] = "{:.2f}".format(easy['Accuracy'] / easy['Solved'])
+            medium['Accuracy'] = "{:.2f}".format(medium['Accuracy'] / medium['Solved'])
+            hard['Accuracy'] = "{:.2f}".format(hard['Accuracy'] / hard['Solved'])
 
             response = Response()
 
-            response.data = {"Solved": solved, "Time": time, "Accuracy": accuracy}
+            response.data = {"Easy": easy, "Medium": medium, "Hard": hard}
 
             return response
 
