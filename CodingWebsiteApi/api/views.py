@@ -42,8 +42,6 @@ class CompanyChart(APIView):
 
                     solved[company.strip()] += 1
 
-            print(solved)
-
             response = Response()
             response.data = solved
 
