@@ -33,14 +33,14 @@ const Navbar = ({clickbrand}) =>
             </NavLink>
         
 
-            <NavLink  to='/profile' id={styles.tabs} style={({ isActive }) => ({color: isActive ? 'rgba(255, 94, 94, 0.75)' : 'rgba(0, 0, 0, 0.75)',background: isActive ? 'rgb(246, 246, 246)' : 'transparent',
+            <NavLink  to='/profile/' id={styles.tabs} style={({ isActive }) => ({color: isActive ? 'rgba(255, 94, 94, 0.75)' : 'rgba(0, 0, 0, 0.75)',background: isActive ? 'rgb(246, 246, 246)' : 'transparent',
             borderRight: isActive ? '2px solid rgba(255, 94, 94, 0.75)': 'none'})}>
                 <AccountCircleRoundedIcon sx={{width:'1.5vw', marginRight:'0.7vw'}}></AccountCircleRoundedIcon>
                 <h3 id={styles.h3}>Profile</h3>
             </NavLink>
         
-        
-            <NavLink to='/practice' id={styles.tabs} style={({ isActive }) => ({color: isActive ? 'rgba(255, 94, 94, 0.75)' : 'rgba(0, 0, 0, 0.75)',background: isActive ? 'rgb(246, 246, 246)' : 'transparent',
+    
+            <NavLink to='/practice/' id={styles.tabs} style={({ isActive }) => ({color: isActive ? 'rgba(255, 94, 94, 0.75)' : 'rgba(0, 0, 0, 0.75)',background: isActive ? 'rgb(246, 246, 246)' : 'transparent',
             borderRight: isActive ? '2px solid rgba(255, 94, 94, 0.75)': 'none'})}>
                 <TerminalRoundedIcon sx={{width:'1.5vw', marginRight:'0.7vw'}}></TerminalRoundedIcon>
                 <h3 id={styles.h3}>Practice</h3>

@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import Chart from 'chart.js/auto';
 import styles from './Profile.module.css';
 import solimg from './images/icons8-coding-100.png';
 import timeimg from './images/icons8-time-100.png';
 import accimg from './images/icons8-accuracy-80.png';
 import { PieChart, pieArcLabelClasses } from '@mui/x-charts/PieChart';
+import { BarChart } from '@mui/x-charts/BarChart';
+import { LineChart } from '@mui/x-charts/LineChart';
+import ReactApexChart from 'react-apexcharts';
+import { Component } from 'react';
+import Chart from 'react-apexcharts';
 
 export default function Profile({})
 { 
@@ -15,6 +19,8 @@ export default function Profile({})
     const [overall_solved_medium,setOverallSolvedMedium] = useState(0);
     const [overall_solved_hard,setOverallSolvedHard] = useState(0);
     const [topicsolved, setTopicSolved] = useState([]);
+
+    const [chartwidth, setChartWidth] = useState(0);
 
     const [companysolved, setCompanySolved] = useState([]);
     const [avgtime,setAvgTime] = useState(0);
@@ -32,6 +38,7 @@ export default function Profile({})
       async function fetchdata(){
       const response = await axios.get('http://127.0.0.1:8000/api/topicchart/',config);
       setTopicSolved(response.data);
+      setChartWidth(Object.keys(response.data['Easy']['Solved']).length*150)
       console.log(response);
     }
     fetchdata();
@@ -60,7 +67,35 @@ export default function Profile({})
     overallchart();
   },[])
 
-    if((companysolved != undefined) && (topicsolved != undefined)){
+  if((companysolved.length != 0) && (topicsolved.length != 0))
+  {
+    const topic_chart_obj = { series : [{name : 'Easy', data : Object.values(topicsolved['Easy']['Solved'])},
+                                        {name : 'Medium', data : Object.values(topicsolved['Medium']['Solved'])},
+                                        {name : 'Hard', data : Object.values(topicsolved['Hard']['Solved'])}],
+                                      
+                              options : { plotOptions: { bar: {horizontal: false, columnWidth: '55%', endingShape: 'rounded'}},
+                                          dataLabels: {enabled: false},
+                                          stroke: {show: true, width: 2, colors: ['transparent']},
+                                          xaxis: {categories: Object.keys(topicsolved['Easy']['Solved'])},}}
+
+    const time_chart_obj = { series : [{name : 'Easy', data : Object.values(topicsolved['Easy']['Time'])},
+                                       {name : 'Medium', data : Object.values(topicsolved['Medium']['Time'])},
+                                       {name : 'Hard', data : Object.values(topicsolved['Hard']['Time'])}],
+                                    
+                              options : { chart: {zoom: {enabled: false}},
+                                          dataLabels: {enabled: false},
+                                          stroke: {curve:'smooth'},
+                                          xaxis: {categories: Object.keys(topicsolved['Easy']['Time'])}, }}
+
+    const acc_chart_obj = { series : [{name : 'Easy', data : Object.values(topicsolved['Easy']['Accuracy'])},
+                                          {name : 'Medium', data : Object.values(topicsolved['Medium']['Accuracy'])},
+                                          {name : 'Hard', data : Object.values(topicsolved['Hard']['Accuracy'])}],
+                                       
+                                 options : { chart: {zoom: {enabled: false}},
+                                             dataLabels: {enabled: false},
+                                             stroke: {curve: 'smooth'},
+                                             xaxis: {categories: Object.keys(topicsolved['Easy']['Accuracy'])},}}
+
     return(
         <>
 
@@ -100,6 +135,21 @@ export default function Profile({})
                             </div>
                           </div>
                       </div>
+                  </div>
+                  <div className="row" id={styles.row}>
+                    <div id={styles.chart}>
+                      <Chart options={topic_chart_obj.options} series={topic_chart_obj.series} type="bar" height={350} width={`${chartwidth}`}/>
+                    </div>
+                  </div>
+                  <div className="row" id={styles.row}>
+                    <div id={styles.chart}>
+                      <Chart options={time_chart_obj.options} series={time_chart_obj.series} type="area" height={350} width={`${chartwidth}`}/>
+                    </div>
+                  </div>
+                  <div className="row" id={styles.row}>
+                    <div id={styles.chart}>
+                      <Chart options={acc_chart_obj.options} series={acc_chart_obj.series} type="area" height={350} width={`${chartwidth}`}/>
+                    </div>
                   </div>
               </div>
               <div className="col-4" style={{padding:'2vw 2vw', height:'fit-content',backgroundColor:'white',borderRadius:'0.5vw',border:'transparent',boxShadow:'0px 4px 8px 4px rgb(230,230,230'}}>

@@ -16,6 +16,10 @@ from .recommendations import recommend_by_topic, recommned_by_description
 from rest_framework import status
 from collections import defaultdict
 
+class CustomPagination(PageNumberPagination):
+
+    page_size = 10
+
 class CompanyChart(APIView):
     def get(self, request):
 
@@ -74,16 +78,26 @@ class ProblemByCompany(ListAPIView):
     serializer_class = ProblemSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     ordering_fields = ['id', 'rating', 'frequency', 'accepted', 'likes']
-    pagination_class = PageNumberPagination
-    def get_queryset(self):
+    ordering = ['id']
+    filterset_fields= {'companies':['icontains']}
+    pagination_class = CustomPagination
 
-        token = self.request.COOKIES['jwt']
+
+    def get_queryset(self):
+        try:
+            token = self.request.COOKIES['jwt']
+            data = ApiProblems.objects.all()
+            return data
+        except:
+            raise AuthenticationFailed('Unauthorized')
+    def post(self, request, *args, **kwargs):
+
+        token = request.COOKIES['jwt']
+
         if not token:
             raise AuthenticationFailed('Unauthorized')
         else:
-            print(self.request.data)
-            data = ApiProblems.objects.filter(companies__icontains = self.request.data['company'])
-            return data
+            return self.list(request, *args, **kwargs)
 
 class TopicChart(APIView):
 
@@ -286,6 +300,7 @@ class AllProblems(ListAPIView):
     filter_backends = [DjangoFilterBackend,OrderingFilter]
     filterset_fields = {'title':['icontains'], 'difficulty':['icontains'], 'related_topics':['icontains']}
     ordering_fields = ['id','rating','frequency','accepted','likes']
+    ordering = ['id']
     pagination_class = PageNumberPagination
 
     def get_queryset(self):

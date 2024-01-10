@@ -36,7 +36,6 @@ def recommend_by_topic(topics):
 
     recommendations = ApiProblems.objects.filter(id__in=index[1:])
 
-
     return recommendations
 
 def recommned_by_description(description):

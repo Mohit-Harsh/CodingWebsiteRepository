@@ -8,6 +8,7 @@ import LoginPage from './LoginPage.jsx';
 import styles from './App.module.css';
 import Navbar from './components/navbar/Navbar.jsx';
 import ProblemPage from './components/problemlist/ProblemPage.jsx';
+import Company from './components/companyproblems/Company.jsx';
 
 function App() {
 
@@ -32,8 +33,11 @@ function App() {
           <div className="col-10" style={{height:'100vh',overflowY:'scroll',overflowX:'hidden'}}>
             <Routes>
               <Route path='/'>
-                <Route index={true} element={<Home email={email}/>}/>
-                <Route path='problem/:title' element={<ProblemPage></ProblemPage>}/>
+                <Route index element={<Home email={email}/>}/>
+                <Route path='problem'>
+                  <Route path='company/:company_name' element={<Company></Company>}/>
+                  <Route path=':title' element={<ProblemPage></ProblemPage>}/>
+                </Route>
               </Route>
               <Route path='profile' element={<Profile></Profile>} />
               <Route path='practice' element={<Practice></Practice>}></Route>

@@ -19,6 +19,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import Navbar from './navbar/Navbar';
 import { useEffect, useState } from "react";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function Home({email})
 {
@@ -139,14 +140,16 @@ export default function Home({email})
 
                   <div className="row" style={{paddingLeft:'1vw', marginTop:'3vw'}}>
 
-                    <div class="card" id={styles.card}>
-                      <div class="card-body">
-                        <div className="row">
-                          <img src={google} alt="" style={{width:'10vw'}}/>
+                    <Link to="problem/company/Google" style={{display:'flex', textDecoration:'none', width:'fit-content'}}>
+                      <div class="card" id={styles.card}>
+                        <div class="card-body">
+                          <div className="row">
+                            <img src={google} alt="" style={{width:'10vw'}}/>
+                          </div>
                         </div>
                       </div>
-                    </div>
-
+                    </Link>
+                    
                     <div class="card" id={styles.card}>
                       <div class="card-body">
                         <div className="row">
