@@ -67,3 +67,90 @@
     
 }
 
+.skills{
+    width: auto;
+    padding: 0vw 0.5vw;
+}
+
+.skillname
+{
+    font-size: 0.7vw;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.75);
+    text-transform: uppercase;
+    margin: 1vw 0vw;
+}
+
+.skillbar
+{
+    height: 0.5vw;
+    background: rgb(0, 0, 0, 0.2);
+    border-radius: 10px;
+}
+
+.skillper
+{
+    height: 0.5vw;
+    background: rgb(36, 157, 249);
+    border-radius: 10px;
+    position: relative;
+    animation: fillbars 1.5s 1;
+}
+
+.skillper::before
+{
+    position: absolute;
+    padding: 4px 6px;
+    background: rgba(0, 0, 0);
+    color: white;
+    opacity: 0.55;
+    border-radius: 4px;
+    font-size: 0.5vw;
+    top: -35px;
+    right:-10;
+}
+
+.skillper .tooltip
+{
+    display: block;
+    visibility: hidden;
+    font-size: 0.5vw;
+    padding: 0 0.3vw;
+    border-radius: 2px;
+    background:rgb(0, 0, 0, 0.65);
+    color: white;
+    width: fit-content;
+    height: fit-content;
+    z-index: 1;
+}
+
+.skillper:hover
+{
+    cursor: pointer;
+    background: rgb(36, 157, 249, 0.4);
+}
+
+.skillper:hover .tooltip
+{
+    visibility: visible;
+    transform: translateY(-1vw);
+    transition-duration: 0.3s;
+}
+
+@keyframes fillbars
+{
+    from{
+        width: 0;
+    }
+    to{
+        width: 100%;
+    }
+}
+
+#h5
+{
+    margin-bottom: 0.5vw;
+    font-size: 1.2vw;
+    font-weight: 500;
+    color: rgba(27, 2, 103, 0.75);
+}

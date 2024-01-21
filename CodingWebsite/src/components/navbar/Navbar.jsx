@@ -51,7 +51,7 @@ const Navbar = ({clickbrand}) =>
             <NavLink to='/logout' id={styles.tabs} style={({ isActive }) => ({color: isActive ? 'rgba(255, 94, 94, 0.75)' : 'rgba(0, 0, 0, 0.75)',background: isActive ? 'rgb(246, 246, 246)' : 'transparent',
             borderRight: isActive ? '2px solid rgba(255, 94, 94, 0.75)': 'none', display:'flex', alignItems:'center', justifyContent:'start'})}>
                 <LoginRoundedIcon sx={{width:'1.5vw', marginRight:'0.7vw'}}></LoginRoundedIcon>
-                <h3 id={styles.h3}>LogIn</h3>
+                <h3 id={styles.h3}>Logout</h3>
             </NavLink>
         
 

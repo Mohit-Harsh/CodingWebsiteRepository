@@ -13,7 +13,7 @@ const New = ({new_prob_list}) =>
                 </div>
                 <div className="card-body" id={styles.body}>
 
-                    {new_prob_list.map((prob)=><Newcard key={prob['id']} title={prob['title']} tags={prob['related_topics'].split(',')}></Newcard>)}
+                    {new_prob_list.map((prob)=><Newcard key={prob['id']} obj={prob} title={prob['title']} tags={prob['related_topics'].split(',')}></Newcard>)}
                     
                 </div>
             </div>

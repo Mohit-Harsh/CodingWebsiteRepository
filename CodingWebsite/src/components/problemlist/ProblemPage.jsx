@@ -7,8 +7,6 @@ import SimilarDescProblems from './SimilarDescProblems.jsx';
 
 export default function ProblemPage()
 {
-    
-
     const config = {
         headers: {
           "Content-Type": "application/json"
@@ -16,6 +14,11 @@ export default function ProblemPage()
         withCredentials: true
         }
     let {state} = useLocation();
+
+    useEffect(() => {
+        window.scrollTo(0,0);
+    },[])
+
     const [similar, setSimilar] = useState([]);
     const [desc,setDesc] = useState([]);
     const description = state['description'].split(',')[0];

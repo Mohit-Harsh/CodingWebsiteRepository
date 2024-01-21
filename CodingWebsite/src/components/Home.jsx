@@ -13,7 +13,7 @@ import tcs from './images/tcs.png'
 import NotificationsRoundedIcon from '@mui/icons-material/NotificationsRounded';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 import Avatar from '@mui/material/Avatar';
-import pic from '../assets/ppic.jpg';
+import pic from '../assets/icons8-user-96.png';
 import Badge from '@mui/material/Badge';
 import MailIcon from '@mui/icons-material/Mail';
 import Navbar from './navbar/Navbar';
@@ -149,30 +149,35 @@ export default function Home({email})
                         </div>
                       </div>
                     </Link>
-                    
-                    <div class="card" id={styles.card}>
-                      <div class="card-body">
-                        <div className="row">
-                          <img src={microsoft} alt="" style={{width:'10vw'}}/>
+                    <Link to="problem/company/Microsoft" style={{display:'flex', textDecoration:'none', width:'fit-content'}}>
+                      <div class="card" id={styles.card}>
+                        <div class="card-body">
+                          <div className="row">
+                            <img src={microsoft} alt="" style={{width:'10vw'}}/>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
 
-                    <div class="card" id={styles.card}>
-                      <div class="card-body">
-                        <div className="row">
-                          <img src={flipkart} alt="" style={{width:'10vw'}}/>
+                    <Link to="problem/company/Flipkart" style={{display:'flex', textDecoration:'none', width:'fit-content'}}>
+                      <div class="card" id={styles.card}>
+                        <div class="card-body">
+                          <div className="row">
+                            <img src={flipkart} alt="" style={{width:'10vw'}}/>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
 
-                    <div class="card" id={styles.card}>
-                      <div class="card-body">
-                        <div className="row">
-                          <img src={infosys} alt="" style={{width:'7vw'}}/>
+                    <Link to="problem/company/Infosys" style={{display:'flex', textDecoration:'none', width:'fit-content'}}>
+                      <div class="card" id={styles.card}>
+                        <div class="card-body">
+                          <div className="row">
+                            <img src={infosys} alt="" style={{width:'7vw'}}/>
+                          </div>
                         </div>
                       </div>
-                    </div>
+                    </Link>
 
                     <div class="card" id={styles.card}>
                       <div class="card-body">
