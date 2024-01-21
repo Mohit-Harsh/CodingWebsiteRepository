@@ -35,10 +35,35 @@ class CompanyTopicSolved(APIView):
             user = {'count':0,'time':0,'accuracy':0,'data':defaultdict(int)}
             company = {'count':0,'data':defaultdict(int)}
 
-            company_data = ProblemSerializer(ApiProblems.objects.filter(companies__icontains=request.data['company']),many=True).data
+            company_data = ProblemSerializer(ApiProblems.objects.filter(companies__icontains=request.data['company']).order_by('frequency'),many=True).data
             company_ids = [x['id'] for x in company_data]
 
             user_data = SolvedProblemSerializer(SolvedProblems.objects.filter(userid=user_id, problemid__in=company_ids), many=True).data
+
+            company_popular_topics = set()
+
+            for c in company_data[-10:]:
+
+                for t in c['related_topics'].split(','):
+
+                    company_popular_topics.add(t)
+
+            company_popular_topics = list(company_popular_topics)[:10]
+
+            temp = defaultdict(int)
+
+            for c in company_data:
+
+                company['count']+=1
+
+                for t in c['related_topics'].split(','):
+
+                    if t in company_popular_topics:
+
+                        temp[t]+=1
+
+            company['data'] = temp
+
 
             for u in user_data:
 
@@ -51,25 +76,12 @@ class CompanyTopicSolved(APIView):
 
             user_data = ProblemSerializer(ApiProblems.objects.filter(id__in=[x['problemid'] for x in user_data]),many=True).data
 
-            for u in user_data:
-
-                for t in u['related_topics'].split(','):
-
-                    user['data'][t]+=1
-
-            topics = list(user['data'].keys())
-
-            print(topics)
-
-            for c in company_data:
-
-                company['count'] += 1
-
-                for t in c['related_topics'].split(','):
-
-                    if(t in topics):
-
-                        company['data'][t]+=1
+            for t in company_popular_topics:
+                for u in user_data:
+                    if t in u['related_topics']:
+                        user['data'][t]+=1
+                    else:
+                        user['data'][t]+=0
 
             response = Response()
             response.data = {'user':user,'company':company}
