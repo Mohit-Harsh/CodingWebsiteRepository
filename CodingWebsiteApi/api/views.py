@@ -20,6 +20,63 @@ class CustomPagination(PageNumberPagination):
 
     page_size = 10
 
+class CompanyTopicSolved(APIView):
+
+    def post(self,request):
+
+        token = request.COOKIES['jwt']
+        if not token:
+            raise AuthenticationFailed('Unauthorized')
+
+        else:
+
+            payload = jwt.decode(token,'secret',algorithms="HS256")
+            user_id = payload['id']
+            user = {'count':0,'time':0,'accuracy':0,'data':defaultdict(int)}
+            company = {'count':0,'data':defaultdict(int)}
+
+            company_data = ProblemSerializer(ApiProblems.objects.filter(companies__icontains=request.data['company']),many=True).data
+            company_ids = [x['id'] for x in company_data]
+
+            user_data = SolvedProblemSerializer(SolvedProblems.objects.filter(userid=user_id, problemid__in=company_ids), many=True).data
+
+            for u in user_data:
+
+                user['count']+=1
+                user['time']+= int(u['time'])
+                user['accuracy']+= float(u['accuracy'])
+
+            user['time'] = "{:.2f}".format(user['time']/user['count'])
+            user['accuracy'] = "{:.2f}".format(user['accuracy'] / user['count'])
+
+            user_data = ProblemSerializer(ApiProblems.objects.filter(id__in=[x['problemid'] for x in user_data]),many=True).data
+
+            for u in user_data:
+
+                for t in u['related_topics'].split(','):
+
+                    user['data'][t]+=1
+
+            topics = list(user['data'].keys())
+
+            print(topics)
+
+            for c in company_data:
+
+                company['count'] += 1
+
+                for t in c['related_topics'].split(','):
+
+                    if(t in topics):
+
+                        company['data'][t]+=1
+
+            response = Response()
+            response.data = {'user':user,'company':company}
+
+            return response
+
+
 class CompanyChart(APIView):
     def get(self, request):
 

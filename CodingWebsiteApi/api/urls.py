@@ -14,5 +14,6 @@ urlpatterns = [
     path('overallchart/', OverallChart.as_view()),
     path('companychart/', CompanyChart.as_view()),
     path('problembycompany/', ProblemByCompany.as_view()),
-    path('problembydescription/', SimilarDescription.as_view())
+    path('problembydescription/', SimilarDescription.as_view()),
+    path('companytopicsolved/',CompanyTopicSolved.as_view()),
 ]
