@@ -40,7 +40,10 @@ function App() {
                 </Route>
               </Route>
               <Route path='profile' element={<Profile></Profile>} />
-              <Route path='practice' element={<Practice></Practice>}></Route>
+              <Route path='practice'>
+                  <Route index element={<Practice></Practice>}/>
+                  <Route path='company/:company_name' element={<Company></Company>}/>
+              </Route>
               <Route path='logout' element={<Home email={email}></Home>}/>
               <Route path='delete' element={<Home email={email}></Home>}/>
             </Routes>

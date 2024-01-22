@@ -20,17 +20,13 @@ export default function Practice()
         {
           setTabstate(0);
         }
-        else if(event.target.innerText == "Lists by experts")
+        else if(event.target.innerText == "Company-wise lists")
         {
           setTabstate(1);
         }
-        else if(event.target.innerText == "Company-wise lists")
-        {
-          setTabstate(2);
-        }
         else if(event.target.innerText == "Topic-wise lists")
         {
-          setTabstate(3);
+          setTabstate(2);
         }
     }
 
@@ -47,13 +43,10 @@ export default function Practice()
                   <h5 id={tabstate == 0 ? styles.h5active : styles.h5}>All problem lists</h5>
                 </div>
                 <div className="col-2" id={styles.col2} onClick={changeState}>
-                  <h5 id={tabstate == 1 ? styles.h5active : styles.h5}>Lists by experts</h5>
-                </div>
-                <div className="col-2" id={styles.col2} onClick={changeState}>
-                  <h5 id={tabstate == 2 ? styles.h5active : styles.h5}>Company-wise lists</h5>
+                  <h5 id={tabstate == 1 ? styles.h5active : styles.h5}>Company-wise lists</h5>
                 </div>
                 <div className="col-2" id={styles.col2} style={{paddingRight:0}} onClick={changeState}>
-                  <h5 id={tabstate == 3 ? styles.h5active : styles.h5}>Topic-wise lists</h5>
+                  <h5 id={tabstate == 2 ? styles.h5active : styles.h5}>Topic-wise lists</h5>
                 </div>
 
             </div>

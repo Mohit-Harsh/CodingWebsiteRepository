@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import Recomprob from "../recommendations/Recomprob";
 import axios from "axios";
 import ReactApexChart from 'react-apexcharts';
+import Title from "../recommendations/Title";
 
 
 const Company = () =>
@@ -165,7 +166,24 @@ const Company = () =>
 
                     <h5 id={styles.h5}>{company_name.toUpperCase()} INTERVIEW PROBLEMS</h5>
 
-                    <div className="row" style={{marginTop:'2vw'}}>
+                    <div className="row" style={{marginTop:'2vw',paddingLeft:'0.5vw'}}>
+                        
+                        <div className="col-6">
+                            <p id={styles.p}>Problem Title</p>
+                        </div>
+                        <div className="col-2" id={styles.col2}>
+                            <p id={styles.p}>Difficulty</p>
+                        </div>
+                        <div className="col-2" id={styles.col2}>
+                            <p id={styles.p}>Accuracy</p>
+                        </div>
+                        <div className="col-2" id={styles.col2}>
+                            <p id={styles.p}>Submissions</p>
+                        </div>
+                        
+                    </div>
+
+                    <div className="row">
                         {problist.map((item,i) => <Recomprob key={i} obj={item} title={item['title']} difficulty={item['difficulty']} accuracy={item['acceptance_rate']} submissions={item['submissions']} />)}
                     </div>
                     <div className="row" id={styles.paginate}>

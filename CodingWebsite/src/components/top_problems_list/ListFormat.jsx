@@ -2,7 +2,7 @@ import React from "react";
 import styles from './ListFormat.module.css';
 import { Link } from "react-router-dom";
 
-export default function ListFormat({logo,title,content,total_problems,time})
+export default function ListFormat({company,logo,title,content,total_problems,time})
 {
     return( <>
 
@@ -37,7 +37,7 @@ export default function ListFormat({logo,title,content,total_problems,time})
 
                 <div className="row" style={{display:'flex',alignItems:'center',justifyContent:'center',padding:'0.5vw 1vw'}}>
 
-                    <button id={styles.btn}>View problem list</button>
+                    <Link to={`company/${company}`}><button id={styles.btn}>View problem list</button></Link>
 
                 </div>
 

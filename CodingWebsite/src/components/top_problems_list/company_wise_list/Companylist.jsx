@@ -16,7 +16,7 @@ export default function Companylist()
 
                 {companies.map((item) => <div className="col-4" id={styles.col4}>
 
-                    <ListFormat title={`${item[1]} Interview Questions`} 
+                    <ListFormat company={item[1]} title={`${item[1]} Interview Questions`} 
                              content={"Ace the Wipro coding interview by solving the Wipro interview questions exclusively on CodeStudio with a range..."}
                              logo={item[0]} total_problems={187} time={"15 hrs"}></ListFormat>
 

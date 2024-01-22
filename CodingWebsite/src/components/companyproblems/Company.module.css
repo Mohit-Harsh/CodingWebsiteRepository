@@ -8,6 +8,12 @@
     margin-top: 2vw;
 }
 
+#p
+{
+    font-size: 0.8vw; color: dimgray;
+    
+}
+
 #ul
 {
     display: flex;
