@@ -137,16 +137,19 @@ export default function Profile({})
                       </div>
                   </div>
                   <div className="row" id={styles.row}>
+                  <h5 id={styles.charttitle}>Solved</h5>
                     <div id={styles.chart}>
                       <Chart options={topic_chart_obj.options} series={topic_chart_obj.series} type="bar" height={350} width={`${chartwidth}`}/>
                     </div>
                   </div>
                   <div className="row" id={styles.row}>
+                  <h5 id={styles.charttitle}>Speed</h5>
                     <div id={styles.chart}>
                       <Chart options={time_chart_obj.options} series={time_chart_obj.series} type="area" height={350} width={`${chartwidth}`}/>
                     </div>
                   </div>
                   <div className="row" id={styles.row}>
+                  <h5 id={styles.charttitle}>Accuracy</h5>
                     <div id={styles.chart}>
                       <Chart options={acc_chart_obj.options} series={acc_chart_obj.series} type="area" height={350} width={`${chartwidth}`}/>
                     </div>

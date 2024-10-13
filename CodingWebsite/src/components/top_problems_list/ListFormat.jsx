@@ -1,6 +1,7 @@
 import React from "react";
 import styles from './ListFormat.module.css';
 import { Link } from "react-router-dom";
+import coding from "./images/icons8-coding-96.png";
 
 export default function ListFormat({company,logo,title,content,total_problems,time})
 {
@@ -12,7 +13,7 @@ export default function ListFormat({company,logo,title,content,total_problems,ti
                 <div className="row">
                     <div className="col-3" id={styles.col3}>
                         <div style={{borderRadius:'5px',border:'1px solid gray',padding:0, overflow:'hidden',width:'100%'}}> 
-                        <img src={logo} alt="" style={{width:'100%'}}/>
+                        <img src={logo} alt={coding} style={{width:'100%'}}/>
                         </div>   
                     </div>
                     <div className="col-9">

@@ -5,7 +5,13 @@
   overflow-y: hidden;
   background-color: transparent;
 }
-
+#charttitle
+{
+  margin-bottom: 0.5vw;
+  font-size: 1.2vw;
+  font-weight: 500;
+  color: rgba(27, 2, 103, 0.75);
+}
 #chart::-webkit-scrollbar
 {
   height: 0.5vw;

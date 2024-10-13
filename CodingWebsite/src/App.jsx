@@ -9,6 +9,7 @@ import styles from './App.module.css';
 import Navbar from './components/navbar/Navbar.jsx';
 import ProblemPage from './components/problemlist/ProblemPage.jsx';
 import Company from './components/companyproblems/Company.jsx';
+import Interviews from './components/interviews/Interviews.jsx';
 
 function App() {
 
@@ -35,7 +36,7 @@ function App() {
               <Route path='/'>
                 <Route index element={<Home email={email}/>}/>
                 <Route path='problem'>
-                  <Route path='company/:company_name' element={<Company></Company>}/>
+                  <Route path='company/:company_name' element={<Interviews></Interviews>}/>
                   <Route path=':title' element={<ProblemPage></ProblemPage>}/>
                 </Route>
               </Route>

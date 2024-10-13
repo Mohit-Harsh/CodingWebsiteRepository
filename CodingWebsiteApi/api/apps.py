@@ -1,6 +1,5 @@
 from django.apps import AppConfig
-import joblib
-from langchain.embeddings import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 
 class ApiConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"

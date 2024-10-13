@@ -1,6 +1,6 @@
 import React from "react";
 import ListFormat from "../ListFormat";
-import wipro from '../images/wipro.png'
+import flipkart from '../images/flipkart.png'
 import google from '../images/google.png'
 import amazon from '../images/amazon.png'
 import microsoft from '../images/microsoft.jpg'
@@ -8,7 +8,7 @@ import styles from './Companylist.module.css'
 
 export default function Companylist()
 {
-    let companies = [[wipro,'Wipro'],[google,'Google'],[amazon,'Amazon'],[microsoft,'Microsoft']]
+    let companies = [[flipkart,'Flipkart'],[google,'Google'],[amazon,'Amazon'],[microsoft,'Microsoft']]
 
     return(
         <>

@@ -1,0 +1,21 @@
+#h5
+{
+    margin-bottom: 1vw;
+    font-size: 1.5vw;
+    font-weight: 600;
+    color: rgba(27, 2, 103, 0.75);
+}
+#p
+{
+  font-size: 0.9vw; color: rgb(70, 70, 70);
+  padding-right: 10vw;
+  text-align: start;
+}
+#ul
+{
+    padding-left: 2vw;
+}
+li
+{
+    font-size: 0.9vw;
+}

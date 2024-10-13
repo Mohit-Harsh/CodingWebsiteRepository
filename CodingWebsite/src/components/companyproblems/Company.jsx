@@ -160,7 +160,7 @@ const Company = () =>
         return(<>
 
             
-            <div className="row" style={{paddingLeft:'2vw',paddingTop:'2vw',paddingRight:'1vw'}}>
+            <div className="row" style={{paddingLeft:'2vw',paddingTop:'2vw',paddingRight:'1vw', paddingBottom:'2vw'}}>
 
                 <div className="col-8">
 
